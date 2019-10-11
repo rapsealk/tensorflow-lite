@@ -29,7 +29,9 @@ abstract class Classifier {
         }
         when (device) {
             Device.NNAPI -> tfliteOptions.setUseNNAPI(true)
-            Device.GPU -> tfliteOptions.addDelegate(gpuDelegate)
+            Device.GPU -> gpuDelegate = GpuDelegate().also {
+                tfliteOptions.addDelegate(it)
+            }
             else -> { /* Device.CPU */ }
         }
         tfliteOptions.setNumThreads(numThreads)
