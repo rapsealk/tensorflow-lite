@@ -35,7 +35,7 @@ class ClassifierActivity : CameraActivity(), ImageReader.OnImageAvailableListene
     private lateinit var cropToFrameTransform: Matrix
     private lateinit var borderedText: BorderedText
 
-    override protected fun getLayoutId(): Int = R.layout.fragment_camera_connection
+    override fun getLayoutId(): Int = R.layout.fragment_camera_connection
 
     override fun getDesiredPreviewFrameSize(): Size = DESIRED_PREVIEW_SIZE
 
@@ -69,10 +69,8 @@ class ClassifierActivity : CameraActivity(), ImageReader.OnImageAvailableListene
     }
 
     override fun processImage() {
-        val rgbFrameBitmap = rgbFrameBitmap ?:
-        throw RuntimeException("rgbFrameBitmap is NULL!")
-        val croppedBitmap = croppedBitmap ?:
-        throw RuntimeException("CroppedBitmap is NULL!")
+        val rgbFrameBitmap = rgbFrameBitmap ?: throw RuntimeException("rgbFrameBitmap is NULL!")
+        val croppedBitmap = croppedBitmap ?: throw RuntimeException("CroppedBitmap is NULL!")
 
         rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight)
         val canvas = Canvas(croppedBitmap).apply {
